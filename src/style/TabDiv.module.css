@@ -9,3 +9,15 @@
     font-weight: 700;
     color: #999999;
 }
+
+.middileTab {
+    position: relative;
+}
+
+.topTab {
+    position: fixed;
+    top: 57px;
+    background: white;
+    z-index: 10000;
+    width: 90%;
+}

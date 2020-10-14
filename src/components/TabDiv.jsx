@@ -1,5 +1,5 @@
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/core"
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import ArticleList from "./ArticleList";
 import { NewsContext } from "../lib/Context";
 import styles from "../style/TabDiv.module.css"
@@ -7,19 +7,25 @@ import styles from "../style/TabDiv.module.css"
 
 export default function TabDiv() {
     const { setQuery, tabIndex, setTabIndex } = useContext(NewsContext)
-    const [scrollState, setScrollState] = useState("top");
+    const [scrollState, setScrollState] = useState("middile");
 
-
-    document.addEventListener("scroll", e => {
+    const checkScrollTop = () => {
         const scrolled = document.scrollingElement.scrollTop
         if (scrolled >= 300) {
-            if (scrollState !== "overNav") {
-                setScrollState("overNav")
-            }
-        } else {
             if (scrollState !== "top") {
                 setScrollState("top")
             }
+        } else {
+            if (scrollState !== "middile") {
+                setScrollState("middile")
+            }
+        }
+    }
+
+    useEffect(() => {
+        document.addEventListener('scroll', checkScrollTop)
+        return () => {
+            document.removeEventListener('scroll', checkScrollTop)
         }
     })
 
@@ -36,7 +42,9 @@ export default function TabDiv() {
             <Tabs isLazy isManual isFitted colorScheme="green" w="100%" index={tabIndex}
                 onChange={handleTabsChange}
             >
-                <TabList position={scrollState === "top" ? "relative" : "sticky"} className={styles.tabList}>
+                <TabList
+                    className={`${styles.tabList} ${scrollState !== "top" ? styles.middileTab : styles.topTab}`}
+                >
                     <Tab >Bit coin</Tab>
                     <Tab >Automotive</Tab>
                     <Tab >Energy</Tab>
