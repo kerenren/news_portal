@@ -8,4 +8,6 @@ export const NewsContext = createContext({
     setApiError: () => { },
     query: "",
     setQuery: () => { },
+    tabIndex: 0,
+    setTabIndex: () => { }
 })

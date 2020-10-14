@@ -1,13 +1,12 @@
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/core"
-import React, { useEffect, useContext, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import ArticleList from "./ArticleList";
-import { getArticles } from "../api";
 import { NewsContext } from "../lib/Context";
 import styles from "../style/TabDiv.module.css"
 
 
 export default function TabDiv() {
-    const { setQuery } = useContext(NewsContext)
+    const { setQuery, tabIndex, setTabIndex } = useContext(NewsContext)
     const [scrollState, setScrollState] = useState("top");
 
 
@@ -28,12 +27,13 @@ export default function TabDiv() {
 
     const handleTabsChange = (index) => {
         setQuery(queries[index])
+        setTabIndex(index)
     }
 
 
     return (
         <div className={styles.newsContainer}>
-            <Tabs isLazy isManual  isFitted colorScheme="green" w="100%"
+            <Tabs isLazy isManual isFitted colorScheme="green" w="100%" index={tabIndex}
                 onChange={handleTabsChange}
             >
                 <TabList position={scrollState === "top" ? "relative" : "sticky"} className={styles.tabList}>

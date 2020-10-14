@@ -12,8 +12,9 @@ function App() {
   const [articles, setArticles] = useState([])
   const [apiError, setApiError] = useState("")
   const [query, setQuery] = useState("bitcoin")
+  const [tabIndex, setTabIndex] = useState(0)
 
-  
+
   async function fetchData(topic) {
     const response = await getArticles(topic);
     console.log(response)
@@ -23,17 +24,17 @@ function App() {
 
   useEffect(() => {
 
-      try {
-        fetchData(query)
-      }
-      catch (error) {
-        setApiError(error)
-      }
- 
-  }, [query , setApiError])
+    try {
+      fetchData(query)
+    }
+    catch (error) {
+      setApiError(error)
+    }
+
+  }, [query, setApiError])
 
   return (
-    <NewsContext.Provider value={{ articles, setArticles, apiError, setApiError, query, setQuery }}>
+    <NewsContext.Provider value={{ articles, setArticles, apiError, setApiError, query, setQuery, tabIndex, setTabIndex }}>
       <Router>
         <Container centerContent maxW="xl">
           <NavBar />
