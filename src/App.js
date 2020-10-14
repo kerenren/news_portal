@@ -1,25 +1,54 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import { Container } from "@chakra-ui/core"
+import { NewsContext } from "./lib/Context"
+import NavBar from "./components/NavBar"
+import Home from "./page/Home"
+import BackToTop from "./components/BackToTop"
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import { getArticles } from "./api";
+
 
 function App() {
+  const [articles, setArticles] = useState([])
+  const [apiError, setApiError] = useState("")
+  const [query, setQuery] = useState("bitcoin")
+
+  
+  async function fetchData(topic) {
+    const response = await getArticles(topic);
+    console.log(response)
+    console.log(response.articles)
+    setArticles(response.articles)
+  }
+
+  useEffect(() => {
+
+      try {
+        fetchData(query)
+      }
+      catch (error) {
+        setApiError(error)
+      }
+ 
+  }, [query , setApiError])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <NewsContext.Provider value={{ articles, setArticles, apiError, setApiError, query, setQuery }}>
+      <Router>
+        <Container centerContent maxW="xl">
+          <NavBar />
+        </Container>
+        <BackToTop />
+
+        <Switch>
+          <Route exact path='/home' component={() => (<Home />)} />
+          <Route exact path="/">
+            <Redirect to="/Home" />
+          </Route>
+        </Switch>
+
+      </Router>
+    </NewsContext.Provider>
   );
 }
 

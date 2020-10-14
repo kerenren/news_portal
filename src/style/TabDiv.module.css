@@ -1,0 +1,11 @@
+.newsContainer {
+    width: 90%;
+    margin: auto;
+    font-family:'Montserrat', sans-serif;
+}
+
+.tabList button {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #999999;
+}

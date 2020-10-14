@@ -1,0 +1,13 @@
+.header {
+    font-size: 3rem;
+    font-weight: 700;
+    font-family:'Montserrat', sans-serif;
+    line-height: 1;
+}
+
+.divider {
+    border-bottom: 0.8rem solid #00ACC1;
+    width: 20rem;
+    margin-bottom: 1rem;
+    padding-top: 0.5rem;
+}
