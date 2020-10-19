@@ -3,6 +3,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import ArticleList from "./ArticleList";
 import { NewsContext } from "../lib/Context";
 import styles from "../style/TabDiv.module.css"
+import queries from "../lib/queries"
 
 
 export default function TabDiv() {
@@ -29,7 +30,6 @@ export default function TabDiv() {
         }
     })
 
-    const queries = ["bitcoin", "automotive", "Energy", "Chemicals", "Maritime", "pulp", "food", "Pharmaceuticals", "oil"]
 
     const handleTabsChange = (index) => {
         setQuery(queries[index])

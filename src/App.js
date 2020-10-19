@@ -3,15 +3,16 @@ import { Container } from "@chakra-ui/core"
 import { NewsContext } from "./lib/Context"
 import NavBar from "./components/NavBar"
 import Home from "./page/Home"
+import Login from './page/Login';
 import BackToTop from "./components/BackToTop"
 import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import { getArticles } from "./api";
-
+import queries from "./lib/queries"
 
 function App() {
   const [articles, setArticles] = useState([])
   const [apiError, setApiError] = useState("")
-  const [query, setQuery] = useState("bitcoin")
+  const [query, setQuery] = useState(queries[0])
   const [tabIndex, setTabIndex] = useState(0)
 
 
@@ -46,6 +47,7 @@ function App() {
           <Route exact path="/">
             <Redirect to="/Home" />
           </Route>
+          <Route path='/login' component={() => (<Login />)} />
         </Switch>
 
       </Router>

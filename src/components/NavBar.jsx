@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Flex, FormControl, FormErrorMessage, Input, Button } from "@chakra-ui/core"
+import { Flex, FormControl, Spacer, Input, Button } from "@chakra-ui/core"
 import styles from "../style/NavBar.module.css"
 
 
@@ -16,17 +16,24 @@ export default function NavBar() {
                         </Link>
                     </li>
                 </ul>
-
-                <FormControl id="search" isRequired display="flex" w="50%">
-                    <Input placeholder="&#xf002; Search for a topic" type="text" />
-                    <Button
-                        ml={2}
-                        colorScheme="teal"
-                        type="submit"
-                    >
-                        Search
+                <Flex align="between">
+                    <FormControl id="search" isRequired display="flex" w="75%">
+                        <Input placeholder="&#xf002; Search for a topic" type="text" />
+                        <Button
+                            ml={2}
+                            colorScheme="teal"
+                            type="submit"
+                        >
+                            Search
                     </Button>
-                </FormControl>
+                    </FormControl>
+                    <Spacer />
+                    <Button colorScheme="teal" variant="outline">
+                        <Link to='/login' >
+                            <p>Login</p>
+                        </Link>
+                    </Button>
+                </Flex>
             </Flex>
         </>
     )
